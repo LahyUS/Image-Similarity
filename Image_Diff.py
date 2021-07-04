@@ -3,7 +3,7 @@ from skimage.measure import compare_ssim
 import imutils
 import cv2
 
-
+#//////////////////////////////////////////////////////#
 def image_differences(imageA, imageB):
     # convert the images to grayscale
     grayA = cv2.cvtColor(imageA, cv2.COLOR_BGR2GRAY)
