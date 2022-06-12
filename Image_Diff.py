@@ -1,17 +1,17 @@
 # import the necessary packages
-from skimage.measure import compare_ssim
+from skimage.metrics import structural_similarity
 import imutils
 import cv2
 
 
 def image_differences(imageA, imageB):
-    # convert the images to grayscale
+    # convert RGB images to grayscale images
     grayA = cv2.cvtColor(imageA, cv2.COLOR_BGR2GRAY)
     grayB = cv2.cvtColor(imageB, cv2.COLOR_BGR2GRAY)
 
     # compute the Structural Similarity Index (SSIM) between the two
     # images, ensuring that the difference image is returned
-    (score, diff) = compare_ssim(grayA, grayB, full=True)
+    (score, diff) = structural_similarity(grayA, grayB, full=True)
     diff = (diff * 255).astype("uint8")
     print("SSIM: {}".format(score))
 
@@ -30,12 +30,12 @@ def image_differences(imageA, imageB):
         cv2.rectangle(imageA, (x, y), (x + w, y + h), (0, 0, 255), 2)
         cv2.rectangle(imageB, (x, y), (x + w, y + h), (0, 0, 255), 2)
     # show the output images
-    cv2.imshow("Original", cv2.resize(imageA, None, fx=0.4, fy=0.5))
-    cv2.imwrite("Result_Original.png", imageA)
-    cv2.imshow("Modified", cv2.resize(imageB, None, fx=0.4, fy=0.5))
-    cv2.imwrite("Result_Modified.png", imageB)
-    cv2.imshow("Diff", cv2.resize(diff, None, fx=0.4, fy=0.5))
-    cv2.imwrite("Result_Diff.png", diff)
-    cv2.imshow("Thresh", cv2.resize(thresh, None, fx=0.4, fy=0.5))
-    cv2.imwrite("Result_Thresh.png", thresh)
+    cv2.imshow("Original", cv2.resize(imageA, None, fx=1, fy=1))
+    #cv2.imwrite("Result_Original.png", imageA)
+    cv2.imshow("Modified", cv2.resize(imageB, None, fx=1, fy=1))
+    #cv2.imwrite("Result_Modified.png", imageB)
+    cv2.imshow("Diff", cv2.resize(diff, None, fx=1, fy=1))
+    #cv2.imwrite("Result_Diff.png", diff)
+    cv2.imshow("Thresh", cv2.resize(thresh, None, fx=1, fy=1))
+    #cv2.imwrite("Result_Thresh.png", thresh)
     cv2.waitKey(0)

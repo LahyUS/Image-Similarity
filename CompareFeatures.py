@@ -30,6 +30,6 @@ def compareSIFT(img1, img2):
 
     # Get result matching image
     result = cv.drawMatches(img1, keypoint_1, img2, keypoint_2, good_points, None)
-    cv.imshow("Result", cv.resize(result, None, fx=0.4, fy=0.8))
+    cv.imshow("Result", cv.resize(result, None, fx=1, fy=1))
     print("Good Matches: ", len(good_points))
     print("How good it's the match: ", len(good_points) / number_keypoint * 100, "%")
